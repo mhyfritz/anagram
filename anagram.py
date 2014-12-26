@@ -8,7 +8,7 @@ import os
 default_dict_file = '/usr/share/dict/words'
 
 
-def solve_db(query, db):
+def solve_with_db(query, db):
     for word in db[''.join(sorted(query.lower()))]:
         if word.lower() != query.lower():
             yield word
@@ -23,9 +23,9 @@ def mk_db(fn):
     return db
 
 
-def solve_file(query, fn):
+def solve_with_file(query, fn):
     db = mk_db(fn)
-    return solve_db(query, db)
+    return solve_with_db(query, db)
 
 
 @click.command()
@@ -38,7 +38,7 @@ def main(dictionary, word):
     if not os.path.exists(dictionary):
         click.echo('no such file "{}"'.format(dictionary), err=True)
         sys.exit(1)
-    anagrams = solve_file(word, dictionary)
+    anagrams = solve_with_file(word, dictionary)
     for a in anagrams:
         click.echo(a)
 
