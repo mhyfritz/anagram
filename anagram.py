@@ -1,9 +1,9 @@
 #! /usr/bin/env python
 
 import sys
+import os
 from collections import defaultdict
 import click
-import os
 
 default_dict_file = '/usr/share/dict/words'
 
@@ -38,9 +38,8 @@ def main(dictionary, word):
     if not os.path.exists(dictionary):
         click.echo('no such file "{}"'.format(dictionary), err=True)
         sys.exit(1)
-    anagrams = solve_with_file(word, dictionary)
-    for a in anagrams:
-        click.echo(a)
+    for anagram in solve_with_file(word, dictionary):
+        click.echo(anagram)
 
 if __name__ == '__main__':
     main()
