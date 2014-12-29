@@ -1,5 +1,6 @@
 Use default words file `/usr/share/dict/words`:
-```
+```bash
+# anagrams for `silent`
 $ ./anagram.py solve silent
 enlist
 listen
